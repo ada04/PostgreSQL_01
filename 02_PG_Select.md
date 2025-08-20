@@ -6,11 +6,11 @@
 
 
 ```pgsql
-select airport_code  from airports; 
+select airport_code from airports; 
 ```
 
 ```pgsql
-select airport_code, airport_name, city  from airports;
+select airport_code, airport_name, city from airports;
 ```
 
 ```pgsql
@@ -19,41 +19,41 @@ select * from airports;
 
 #### Исключение дублирования данных
 ```pgsql
-select aircraft_code from flights f;
+select aircraft_code from flights;
 ```
 
 ```pgsql
-select distinct aircraft_code from flights f;
+select distinct aircraft_code from flights;
 ```
 
 ```pgsql
-select passenger_name  from tickets t ;
+select passenger_name from tickets;
 ```
 
 ```pgsql
-select distinct passenger_name  from tickets t ;
+select distinct passenger_name from tickets;
 ```
 
 #### Условия выбора
 
 ```pgsql
-select * from bookings b ;
+select * from bookings;
 ```
 
 ```pgsql
-select * from bookings b 
+select * from bookings
 where total_amount > 1200000;
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure 
-from flights f 
+from flights 
 where scheduled_departure = '2017-08-24 09:30';
 ```
 
 ```pgsql
 select flight_no, departure_airport, aircraft_code  
-from flights f 
+from flights
 where departure_airport = 'SVO' and aircraft_code = '773';
 ```
 
@@ -62,86 +62,86 @@ where departure_airport = 'SVO' and aircraft_code = '773';
 #### Выражение LIKE
 
 ```pgsql
-select * from airports a 
+select * from airports
 where airport_code like 'M%';
 ```
 
 ```pgsql
-select * from airports a 
+select * from airports
 where airport_code like '_M%';
 ```
 
 ```pgsql
 select flight_no, departure_airport, aircraft_code  
-from flights f 
+from flights
 where flight_no like 'P____6'; --6 char
 ```
 
 #### Выражение BETWEEN
 
 ```pgsql
-select * from bookings b 
+select * from bookings
 where total_amount between 35200 and 35300;
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure 
-from flights f 
+from flights
 where scheduled_departure BETWEEN '2017-08-24' and '2017-08-25';
 ```
 
 ```pgsql
-select city  from airports a where city between 'А' and 'В';
+select city from airports where city between 'А' and 'В';
 ```
 
 #### Выражение IN
 
 ```pgsql
 select airport_code, city  
-from airports a 
+from airports
 where airport_code in ('SVO', 'DME', 'VKO');
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure 
-from flights f 
+from flights
 where scheduled_departure IN ('2017-08-24 09:30',  '2017-08-24 10:30');
 ```
 
 ```pgsql
 select airport_code, city  
-from airports a 
+from airports
 where airport_code not in ('SVO', 'DME', 'VKO');
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure 
-from flights f 
+from flights
 where departure_airport in ('SVO', 'DME', 'VKO')
   and flight_no like '%2';
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure, actual_departure  
-from flights f 
+from flights
 where actual_departure  in ('2017-02-10 12:30', '2017-02-10 13:30', '2017-02-10 14:30', NULL);
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure, actual_departure  
-from flights f 
+from flights
 where actual_departure  not in ('2017-02-10 12:30', '2017-02-10 13:30', '2017-02-10 14:30', NULL);
 ```
 
 ```pgsql
-select book_ref from bookings b 
+select book_ref from bookings
 where total_amount > 1200000;
 ```
 
 ```pgsql
-select * from tickets t 
+select * from tickets
 where book_ref in 
- (select book_ref from bookings b 
+ (select book_ref from bookings
   where total_amount > 1200000);
 ```
   
@@ -149,20 +149,20 @@ where book_ref in
 
 ```pgsql
 select flight_no, departure_airport, status, actual_departure  
-from flights f 
+from flights
 where actual_departure is null;
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure, actual_departure  
-from flights f 
+from flights
 where actual_departure  in ('2017-02-10 12:30', '2017-02-10 13:30', '2017-02-10 14:30')
   or actual_departure is NULL;
 ```
 
 ```pgsql
 select flight_no, departure_airport, scheduled_departure, actual_departure  
-from flights f 
+from flights
 where (actual_departure  in ('2017-02-10 12:30', '2017-02-10 13:30', '2017-02-10 14:30')
   or actual_departure is null)
   and scheduled_departure < '2017-08-16';
@@ -172,7 +172,7 @@ where (actual_departure  in ('2017-02-10 12:30', '2017-02-10 13:30', '2017-02-10
 
 ```pgsql
 select flight_no, departure_airport, arrival_airport, actual_departure - scheduled_departure as delay   
-from flights f 
+from flights
 where actual_departure is not null
  and actual_departure - scheduled_departure > '04:30:00';
 ```
@@ -183,19 +183,19 @@ where actual_departure is not null
 
 ```pgsql
 select 'Воздушное судно '||model||' с кодом '||aircraft_code ||' и дальностью полёта '||range||' км.' as txt
-from aircrafts a ;
+from aircrafts;
 ```
 
 ```pgsql
 select CONCAT('Воздушное судно ',model,' с кодом ',aircraft_code,' и дальностью полёта ',range,' км.') as txt
-from aircrafts a ;
+from aircrafts;
 ```
 
 Вывести названия аэропортов, которые содержат название города
 
 ```pgsql
 select airport_name, city  
-from airports a 
+from airports
 where airport_name like '%'||city||'%';
 ```
  
@@ -213,7 +213,7 @@ select ticket_no, boarding_no,
     when 3 then 'Фирменная ручка'
     else 'Открытка'
    end as gift
-from boarding_passes bp 
+from boarding_passes
 where flight_id =43915;
 ```
 
@@ -225,7 +225,7 @@ select ticket_no, fare_conditions,
   case fare_conditions  
     when 'Business' then amount * 0.2
    end as Bonus
-from ticket_flights tf  
+from ticket_flights
 where flight_id =36094;
 ```
 
@@ -242,7 +242,7 @@ select ticket_no, boarding_no,
     when boarding_no <= 5 then 'Фирменный блокнот'
     else 'Открытка'
    end as gift
-from boarding_passes bp 
+from boarding_passes
 where flight_id =43915;
 ```
 
@@ -269,7 +269,7 @@ select ticket_no, fare_conditions,
 	      when ticket_no like '%1' then amount * 0.2
 	   end   
    end as Bonus
-from ticket_flights tf  
+from ticket_flights
 where flight_id =36094;
 ```
 
@@ -286,7 +286,7 @@ select * from airports order by timezone desc, city asc;
 
 ```pgsql
 select ticket_no, boarding_no
-from boarding_passes bp 
+from boarding_passes
 where flight_id =43915
 --order by 2
 limit 5;
@@ -294,7 +294,7 @@ limit 5;
 
 ```pgsql
 select ticket_no, boarding_no
-from boarding_passes bp 
+from boarding_passes
 where flight_id =43915
 --order by 2
 limit 2
