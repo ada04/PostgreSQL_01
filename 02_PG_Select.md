@@ -4,11 +4,11 @@
 
 Выбор столбцов из одной таблицы
 
-''' select airport_code  from airports;
+` select airport_code  from airports; `
 
-``` select airport_code, airport_name, city  from airports;
+select airport_code, airport_name, city  from airports;
 
-``` select * from airports;
+select * from airports;
 
 -- Исключение дублирования данных
 select aircraft_code from flights f;
