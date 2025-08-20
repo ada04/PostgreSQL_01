@@ -363,5 +363,7 @@ select * from tickets t ;
 ```pgsql
 select * from bookings b ;
 ```
-select * from aircrafts a ;
 
+```pgsql
+select * from aircrafts a ;
+```
