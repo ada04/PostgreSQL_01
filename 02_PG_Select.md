@@ -217,8 +217,8 @@ from boarding_passes
 where flight_id =43915;
 ```
 
-Купившим билет на рейс 36094 
-в класс Business начислить 20% кешбек, Economy не начислять
+> Купившим билет на рейс 36094 
+> в класс Business начислить 20% кешбек, Economy не начислять
 
 ```pgsql
 select ticket_no, fare_conditions,  
