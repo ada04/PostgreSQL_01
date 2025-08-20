@@ -6,7 +6,9 @@
 
 ` select airport_code  from airports; `
 
+```pgsql
 select airport_code, airport_name, city  from airports;
+```
 
 select * from airports;
 
